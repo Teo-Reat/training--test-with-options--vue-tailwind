@@ -1,28 +1,42 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+    <div id="app" class="w-1/5 mx-auto my-16">
+        <app-card v-for="(test, index) in tests"
+                  v-show="index === counter"
+                  @next-question="counter++"
+                  :test="test"
+                  :key="index"/>
+    </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+    import Card from "./components/Card";
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+    export default {
+        data() {
+            return {
+                counter: 0,
+                tests: [
+                    {
+                        question: '2 + 2',
+                        rightAnswer: 4,
+                        options: [3, 4, 5, 6]
+                    },
+                    {
+                        question: '3 + 3',
+                        rightAnswer: 6,
+                        options: [3, 4, 5, 6]
+                    }
+                ]
+            }
+        },
+        components: {
+            AppCard: Card
+        }
+    }
 </script>
 
+<style src="./css/tailwind.css"/>
+
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
